@@ -1,0 +1,74 @@
+{
+  "enabled": {
+    "description": "是否启用语境分条",
+    "type": "bool",
+    "hint": "关闭后插件不会修改机器人回复。",
+    "default": true
+  },
+  "input_disable_keywords": {
+    "description": "最高优先级：命中后强制不分条的输入关键词列表",
+    "type": "list",
+    "items": {
+      "type": "string"
+    },
+    "default": [
+      "作文",
+      "写作",
+      "简历",
+      "个人介绍",
+      "自我介绍",
+      "个人简介",
+      "怎么写",
+      "结合教材",
+      "展开讨论",
+      "谈你的理解",
+      "论述",
+      "内在联系",
+      "为什么说"
+    ]
+  },
+  "output_disable_keywords": {
+    "description": "第二优先级：命中后强制不分条的输出关键词列表",
+    "type": "list",
+    "items": {
+      "type": "string"
+    },
+    "default": []
+  },
+  "protect_structured_multiline_output": {
+    "description": "第三优先级：保护结构化多行输出，不按换行拆条",
+    "type": "bool",
+    "hint": "适用于会话信息、状态面板、仓库信息、字段列表等一行一项的输出。",
+    "default": true
+  },
+  "structured_multiline_min_lines": {
+    "description": "第三优先级：判定为结构化多行输出的最少行数",
+    "type": "int",
+    "hint": "只有非空行数达到这个值时，才会启用结构化多行保护。",
+    "default": 5
+  },
+  "force_segment_on_newline": {
+    "description": "第四优先级：检测到换行则按现有换行分条",
+    "type": "bool",
+    "hint": "开启后，只要输出里有换行符，就会在语境分条前优先按现有换行分条。",
+    "default": true
+  },
+  "min_length_to_segment": {
+    "description": "第五优先级：触发语境分条的最短文本长度",
+    "type": "int",
+    "hint": "文本长度低于该值时通常不走语境分条。",
+    "default": 20
+  },
+  "max_paragraphs": {
+    "description": "第五优先级：语境分条的最多条数",
+    "type": "int",
+    "hint": "插件会根据语境动态决定条数，但不会超过这个值。",
+    "default": 4
+  },
+  "send_delay_seconds": {
+    "description": "发送多条消息时，相邻条目之间的延迟秒数",
+    "type": "float",
+    "hint": "设为 0 可连续发送；适当延迟可以让分条效果更自然。",
+    "default": 0.4
+  }
+}

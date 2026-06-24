@@ -5,7 +5,7 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
-from astrbot.api import AstrBotConfig
+from astrbot.api import AstrBotConfig, logger
 from astrbot.api.event import AstrMessageEvent, MessageChain, filter
 import astrbot.api.message_components as Comp
 from astrbot.api.star import Context, Star, register
@@ -127,10 +127,11 @@ class ContextualSegmenterPlugin(Star):
         for index, segment in enumerate(segments):
             if delay > 0 and index > 0:
                 await asyncio.sleep(delay)
-            await self.context.send_message(
-                event.unified_msg_origin,
-                MessageChain().message(segment),
-            )
+            try:
+                await event.send(event.plain_result(segment))
+            except Exception as exc:
+                logger.warning("[%s] failed to send follow-up segment: %s", PLUGIN_ID, exc)
+                break
 
     def _segment_text(self, text: str, input_text: str, cfg: dict[str, Any]) -> list[str]:
         original = text

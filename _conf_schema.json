@@ -56,9 +56,9 @@
     "default": 5
   },
   "force_segment_on_newline": {
-    "description": "第二优先级（不截断）：检测到换行则记录现有分条",
+    "description": "第二优先级（成功即截断）：检测到换行则强制分条",
     "type": "bool",
-    "hint": "检测后仍继续模型判断；只有模型失败时才采用记录的换行分条，并受最大条数限制。",
+    "hint": "输入输出关键词和结构化保护均未命中时，按现有换行立即分条，并受最大条数限制。",
     "default": true
   },
   "model_decision_enabled": {

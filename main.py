@@ -83,7 +83,7 @@ class SegmentDecision:
     paragraph_count: int
 
 
-@register(PLUGIN_ID, "Codex", "根据语境智能控制回复分条", "1.1.0")
+@register(PLUGIN_ID, "Codex", "根据语境智能控制回复分条", "1.1.1")
 class ContextualSegmenterPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig | None = None):
         super().__init__(context)
@@ -165,6 +165,8 @@ class ContextualSegmenterPlugin(Star):
         if hard_protection_matched:
             return [original]
 
+        newline_segments = self._split_by_existing_newlines(text, cfg)
+
         if bool(cfg.get("model_decision_enabled", True)):
             model_segments = await self._decide_with_model(
                 text,
@@ -176,15 +178,15 @@ class ContextualSegmenterPlugin(Star):
             if model_segments is not None:
                 return model_segments
 
-        return self._apply_fallback_rules(text, original, cfg)
+        return self._apply_fallback_rules(text, original, cfg, newline_segments)
 
     def _apply_fallback_rules(
         self,
         text: str,
         original: str,
         cfg: dict[str, Any],
+        newline_segments: list[str] | None,
     ) -> list[str]:
-        newline_segments = self._split_by_existing_newlines(text, cfg)
         decision = self._decide(text, cfg)
         max_paragraphs = max(1, int(cfg.get("max_paragraphs", 3)))
 

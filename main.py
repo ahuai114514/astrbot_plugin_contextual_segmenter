@@ -84,7 +84,7 @@ class SegmentDecision:
     paragraph_count: int
 
 
-@register(PLUGIN_ID, "Codex", "根据语境智能控制回复分条", "1.1.2")
+@register(PLUGIN_ID, "ahuai", "根据语境智能控制回复分条", "1.1.2")
 class ContextualSegmenterPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig | None = None):
         super().__init__(context)

@@ -1,4 +1,4 @@
-# astrbot_plugin_contextual_segmenter
+# 语境智能分段
 
 该项目由 Codex 编写。
 

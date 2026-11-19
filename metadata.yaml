@@ -1,8 +1,8 @@
 name: astrbot_plugin_contextual_segmenter
-display_name: 语境智能分段
+display_name: 消息分段
 short_desc: 根据语境智能分段的回复插件
 desc: 根据文本语境决定是否分段，并动态选择段落数，避免过度分段。
-version: v1.1.3
+version: v1.1.4
 author: ahuai
 repo: https://github.com/ahuai114514/astrbot_plugin_contextual_segmenter
 astrbot_version: ">=4.16,<5"
